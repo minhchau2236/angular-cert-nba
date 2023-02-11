@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-sm-11" [formGroup]="selectForm">
+    <select formControlName="con">
+      <option value="" selected>Select</option>
+      <option [value]="con.id" *ngFor="let con of Conferences">
+        {{ con.name }}
+      </option>
+    </select>
+    <select formControlName="div">
+      <option value="" selected>Select</option>
+      <option [value]="div.id" *ngFor="let div of currentDivisions">
+        {{ div.name }}
+      </option>
+    </select>
+    <select formControlName="team">
+      <ng-container *ngIf="teams$ | async">
+        <option [value]="team.id" *ngFor="let team of currentTeams">
+          {{ team.full_name }}
+        </option>
+      </ng-container>
+    </select>
+    <button class="primary" (click)="trackTeam(teamSelect?.value)">
+      Track team
+    </button>
+    <select formControlName="noOfDay">
+      <option [value]="day" *ngFor="let day of days">
+        {{ day }}
+      </option>
+    </select>
+    Days
+  </div>
+</div>
+<div class="row">
+  <app-team-stats
+    class="col-sm-4"
+    *ngFor="let team of nbaService.getTrackedTeams()"
+    [team]="team"
+    [noOfDays]="noOfDaySelect?.value"
+  >
+  </app-team-stats>
+</div>

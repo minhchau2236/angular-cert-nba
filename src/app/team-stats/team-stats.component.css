@@ -1,0 +1,31 @@
+:host {
+  padding: 10px;
+  margin: 5px;
+  display: block;
+}
+span{
+  float: right;
+  cursor: pointer;
+}
+
+mark.W {
+  background-color: green;
+}
+
+mark.L {
+  background-color: red;
+}
+
+mark {
+  flex: 0 0;
+}
+
+.mark-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.card {
+  max-width: 100%;
+}
