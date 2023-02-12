@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  fe-prod-ng-cer-nba:
+    build:
+      context: .
+    healthcheck:
+      test: curl --fail -s http://localhost/health-check || exit 1
+      interval: 1m
+      timeout: 5s
+      retries: 3
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.web_fe_ng-cer-nba.rule=Host(`ng-cer-nba.chauchiminh.com`)
+      - traefik.http.routers.web_fe_ng-cer-nba.entrypoints=websecure
+      - traefik.http.routers.web_fe_ng-cer-nba.tls.certresolver=myresolver
+    networks:
+      - proxy_network
+networks:
+  proxy_network:
+    external:
+      name: proxy_network
